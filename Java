@@ -1,1 +1,42 @@
-Java是从类中的main方法开始执行的
+**java程序区分大小写**
+public class helloworld//定义类 **类名都是以大写字母开头**
+{
+**一个类可以包含几个方法**
+public static void main(String [] args)//添加主方法/函数
+  {
+     System.out.println("hello world");
+  }
+}
+**Java是从类中的main方法开始执行的**
+
+
+基础语法：
+·java包即类库单元，包内包含一组类，使用关键字import来导入一个包。
+举例：声明后import java.util*就可以直接使用名为java.util包内的所有类。
+直接使用的意思是不需要对类再进行定义和声明。
+有用的链接：https://blog.csdn.net/zhenyusoso/article/details/6174834.
+·字符常量：用单引号括起来的字符。
+·布尔常量：只有ture和false。
+·接口（interfere）
+·运算符+可以用于字符串相加
+
+**强制类型转换总结**
+{
+  java将自动把小范围类型的变量转换为大范围类型的变量；
+  大范围类型变量转化为小范围类型变量必须显式完成.
+}
+
+·&&,||和&以及|的区别：结果相同，但是有短路效果，一般建议使用&&,||
+·switch（表达式**只能取以下类型：byte short int char 枚举 string类型**）{
+      case 1:
+        ...;
+        break;
+      case 2:
+        ...;
+        break;
+      ...
+      default:
+        ...;
+        break;
+      }
+
