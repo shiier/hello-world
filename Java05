@@ -1,0 +1,29 @@
+··Eclipse基本
+alt+/ 起提示作用
+导入包  ctrl+shift+o 
+注释  ctrl+/,ctrl+shift+/,ctrl+shift+\
+代码上下移动 选中代码alt+上/下箭头
+查看源码  选中类名(F3或者Ctrl+鼠标点击)
+·jar是什么?
+jar是多个class文件的压缩包。
+jar有什么用?
+用别人写好的东西
+打jar包
+选中项目--右键--Export--Java--Jar--自己指定一个路径和一个名称--Finish
+使用jar包
+复制到项目路径下并添加至构建路径。
+·debug：F6:看到每一行的执行过程。
+
+java api中文帮助文档：https://blog.fondme.cn/apidoc/jdk-1.8-google/
+··常用类
+Object类/Scanner类
+String类/StringBuffer类/StringBuilder类
+数组高级和Arrays类
+基本类型包装类(Integer,Character)
+正则表达式(Pattern,Matcher)
+Math类/Random类/System类
+BigInteger类/BigDecimal类
+Date类/DateFormat类/Calendar类
+子类的构造方法默认访问的是父类的无参构造方法，因为作为根类的object类只存在无参的构造方法。
+  
+ 面试题：integer i=1;i+=1;做了哪些事情
