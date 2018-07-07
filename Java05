@@ -17,13 +17,22 @@ jar有什么用?
 java api中文帮助文档：https://blog.fondme.cn/apidoc/jdk-1.8-google/
 ··常用类
 Object类/Scanner类
-String类/StringBuffer类/StringBuilder类
+String类/StringBuffer类/StringBuilder类：String长度固定；StringBuffer长度可变线程安全，默认初始容量为16个字符；
+StringBuilder长度可变，线程不安全，效率高
 数组高级和Arrays类
 基本类型包装类(Integer,Character)
 正则表达式(Pattern,Matcher)
 Math类/Random类/System类
 BigInteger类/BigDecimal类
 Date类/DateFormat类/Calendar类
+
 子类的构造方法默认访问的是父类的无参构造方法，因为作为根类的object类只存在无参的构造方法。
   
  面试题：integer i=1;i+=1;做了哪些事情
+ String s =new String("HELLO");和String s = "HELLO"的区别是前者创建了两个对象，后者只创建了一个
+字符川的值一旦被创建内容就不能改变，但是字符串的引用可以发生改变，即指向能改变。
+==比较引用类型时，比较的是地址值。
+String和StringBuffer的相互转换：String（StringBuffer buffer）/StringBuffer（String str）
+
+java中0.09+0.01!=0.1 因为32位的float型用二进制来表示0.01时会有误差，要精确运算要使用bigdecimal
+Random(long seed)有种子的时候每次产生的随机数相同，没有则每次产生不同的随机数。
