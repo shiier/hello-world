@@ -46,9 +46,18 @@ List list = new ArrayList();集合创建 遍历可以使用iterator()创建对�
 ·Enumeration类：类似于迭代器的方式，hasMoreElements(),nextElement(),
 /自己定义集合类——栈/
 
+增强for：简化数组和集合的遍历
 for (循环变量类型 循环变量名称 : 要被遍历的对象) {循环体} 循环变量的名称随便写
 
-·泛型<?> 任意类型，如果没有明确，那么就是Object以及任意的Java类了,解决类型转换的问题、
+泛型 参考https://blog.csdn.net/s10461/article/details/53941091
+·泛型<?> 就是将类型由原来的具体的类型参数化，然后在使用/调用时传入具体的类型（类型实参）
+可以是任意类型，默认情况下就是Object以及任意的Java类了,解决类型转换的问题、
 泛型类 public class 类名<泛型类型1,...>
 泛型方法 public <泛型类型> 返回类型 方法名(泛型类型 )
 泛型接口 public interface 接口名<泛型类型1...>
+Collection<? super E> c = new ArrayList<E>();向上限定E及其父类
+Collection<? extends E> c = new ArrayList<E>();向下限定E及其子类
+Collection<?> c = new ArrayList<E>();
+遍历：Iterator<String> it = array.iterator();//等式右边是一个方法，不是类型
+·可变参数 格式：修饰符 返回值类型 方法名(数据类型...变量名){}
+这里的变量是一个数组，可变参数一定要放在多个参数的最后一个
