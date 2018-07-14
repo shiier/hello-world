@@ -1,7 +1,7 @@
 **集合类** 便于多个对象的操作 集合类有很多种，下面Collection/list/
 集合类和数组同是容器，区别在于集合长度可变，只能存储对象，可以是不同类型；数组长度固定可以存储对象和基本数据类型。
 （Student[] 对象数组）Object[] toArray()把集合转成对象数组 String再转成字符串
-·Collection接口 
+···Collection接口 
 创建集合：Collection c = new ArrayList();接口不可以创建对象，右边是接口的实现类对象，利用多态；
 ·Iterator接口，对Collection进行迭代的迭代器，集合特有的遍历方式，依赖于集合而存在。
 Iterator it = c.iterator();
@@ -28,9 +28,9 @@ students[1] = s2;
 students[2] = s3;
 ？？？？？？？？？？？？？？？？？？
 ？同一个文件中不加public的类和不同文件中加public的类
-·List接口：有序的集合，可以对列表中每个元素的插入位置进行精确地控制。允许重复的元素。
+··Lis·t接口：有序的集合，可以对列表中每个元素的插入位置进行精确地控制。允许重复的元素。
 List list = new ArrayList();集合创建 遍历可以使用iterator()创建对象,也可以用普通for循环。
-·Set接口：无序集合，元素唯一。
+··Set接口：无序集合，元素唯一。
 ·ListIterator接口 列表迭代器 hasNext()和next()方法
 通过迭代器去遍历集合的时候，不能在通过集合去操作。
 解决方案：
@@ -68,9 +68,24 @@ Collection<?> c = new ArrayList<E>();
 //自己写用户登陆游戏//
 参考：https://blog.csdn.net/vking_wang/article/details/14166593
 ·哈希表：数组+链表
+Collection：List：ArrayList、Vector、LinkedList
+            Set：HashSet、TreeSet
 
-
-
-
-
-
+···Map接口：将键映射到值的对象；每一个映射不能包含重复的键；每个键最多映射到一个值，值可重复。
+元素是按照键值对的形式存储的
+与Collection接口不同的是，Map是双列的，Collection是单列的；Map键唯一；Map集合的数据结构针对键有效
+跟值无关，Collection集合的数据结构是针对元素有效的。
+·HashMap类：键是哈希表结构，保证键的唯一性
+·LinkedHashMap类
+·TreeMap类
+创建集合对象：Map<String/Integer,String/Integer> map = new HashMap<String/Integer,String/Integer>();
+添加元素：map.put(K Key,V value);
+获得元素：map.get(K Key);
+Map集合遍历的方法：
+1.根据键找值 Set<String> name = map.keyset(); //获取Map集合的所有键的Set集合
+            for(String key:name){String value = map.get(key);}
+2.根据键值对对象找键和值 Set<Map.Entry<String,String>> entrySet = map.entrySet();
+                       for(Map.Entry<String,String> name:entrySet){
+                        String key = name.getKey();
+                        
+                        }
