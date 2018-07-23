@@ -1,4 +1,4 @@
-··异常：Java对不正常情况进行描述后的对象体现。分为1.编译时异常(其他)和运行时异常(RuntimeException类及其子类)
+··异常：Java对不正常情况进行描述后的对象体现。分为1.编译时异常(其他Exception)和运行时异常(RuntimeException类及其子类)
 编译时异常java程序必须显示处理，否则程序出错无法通过编译；运行时异常，不一定要显示处理。
 ·异常处理方式：
 A.try{//检测异常//可能出现问题的代码}catch(异常类名 变量){//捕捉异常//针对问题的处理}finally{//结束资源//释放资源代码}。
@@ -6,13 +6,21 @@ A.try{//检测异常//可能出现问题的代码}catch(异常类名 变量){//�
 一旦try里面的代码有问题，就不在执行try里面的内容，和catch里面的内容依次的匹配，一旦有一个匹配，其他的不执行。
 ·finally:用于释放资源，被finally控制的与具体一定会执行，除非在finally之前jvm退出(比如System.exit(0))
 Q1:final,finally和finalize的区别
+final：修饰类，类不能被继承；修饰成员变量，变量是常量；修饰成员方法，方法不能被重写。
+finally：用于释放资源，被finally控制的代码永远会执行。
+finalize：是Object类的方法，启动垃圾回收器，用于回收垃圾。
 Q2:如果catch里面有return语句，请问finally的代码还会执行吗?如果会，请问是在return前还是return后?
+？会，代码跑出来是在return之后。
 ·Throwable类： 
     B.throws方法表示出现异常的一种可能性，并不一定会发生这些异常，用在方法声明后，跟异常类名，可以跟多个用逗号隔
 开，表示抛出异常由方法调用者来处理。
     throw方法则是一定抛出了异常，用在方法体内，跟异常对象名，只能抛出一个异常对象名，由方法体内的语句处理。
 ·子类重写父类方法时，子类的方法必须抛出与父类相同的异常或者父类异常的子类，不能抛出父类没有的异常。如果被重写的方
 法没有异常抛出，那么子类的方法绝对不能抛出异常，万一子类方法内有异常发生，只能try不能throws。
+ *throw是语句抛出异常。
+ *      //***抛出异常e实例或新的Exception实例
+ *      a.catch中的throw e;
+ *      b.方法体中的throw new Exception();自己抛出一个异常，自定义的异常需要明确的throw出来，因为满足这个条件往往是我们自己制定的规则不满足了。
 
 ··File类：文件和目录径名的抽象表达形式(仅仅是一个路径的表示，不代表具体的事物一定是存在的)
 ！构造方法不能递归使用！
@@ -30,7 +38,7 @@ java对数据的操作都是通过流的方式，用于操作流的对象都在I
    ·FileWriter/FileReader转换流
    ·BufferedWriter/BufferedReader字符缓冲流
 由这四个类派生出来的自子类名称都是以父类名作为子类名的后缀，如FileInputStream
-
+File file = new File("f:\\aaa\\bbb\\b.txt");不加mkdir/mkdirs时没有具体的文件生成
 //练习//复制文本文件、图片
 标准输入输出流：System.in/System.out
 随机访问RandomAccessFile类，融合了InputStream和OutputStream的功能，支持随机访问文件的读取和写入
