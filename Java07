@@ -36,25 +36,59 @@ java对数据的操作都是通过流的方式，用于操作流的对象都在I
 分类：输入流读入数据/输出流写出数据；默认按照数据类型分为字节流/字符流。
 ·字节流的抽象基类：InputStream/OutputSteam 参考主体eclipse编程工具
    ·FileOutputStream字节流写数据
-   public FileOutputStream(File file,boolean append)throws FileNotFoundException 将字节写入指定文件末尾而不改变原有的内容
+      -public FileOutputStream(File file,boolean append)throws FileNotFoundException 将字节写入指定文件末尾而不改变原有的内容
+          /*FileOutputStream fos = new FileOutputStream("a.txt");
+           *Q:创建字节输入流对象做了哪些事情呢? 
+             A:调用系统功能创建了一个文件a.txt 
+             B:创建了一个对象fos
+             C:把fos对象指向了a.txt文件
+          fos.close();释放资源*/
    ·FileInputStream读取刚写的数据显示在控制台，读取方式有：一次读取一个字节byte/依次读取一个字节数组byte[]  
-   read()/read(byte[] b) 前者返回数据的下一个字节位置？/后者返回读入缓冲区的总字节数
    ·BufferedOutputStream/BufferedInputStream字节缓冲输出/输入流
-/*FileOutputStream fos = new FileOutputStream("a.txt");
-*Q:创建字节输入流对象做了哪些事情呢? 
-A:调用系统功能创建了一个文件a.txt 
-B:创建了一个对象fos
-C:把fos对象指向了a.txt文件
-fos.close();释放资源*/
+      -缓冲流不能直接操作文件，是建立在基本的操作流之上的，称为高级流。
+
+//练习//复制文本文件、图片(read()/read(byte[] b) 前者返回数据的下一个字节位置？/后者返回读入缓冲区的总字节数)
+    复制的四种方式：1.一个字节一个字节复制：FileInputStream fis = new FileInputStream("f:\\");
+                                    FileOutputStream fos = new FileOutputStream("d:\\");
+                                    int by = 0; 
+                                    while((by = fis.read())!=-1){fos.write(by);}
+                  2.一个字节数组复制：FileInputStream fis = new FileInputStream("f:\\");
+                                FileOutputStream fos = new FileOutputStream("d:\\");
+                                byte[] bys = new byte[1024];(usually is n*1024)
+                                int len = 0;
+                                while((len = fis.read(bys))!=-1){fos.write(bys,0,len);}
+                  3.高效缓冲字节流一次读写一个字节:BufferedInputStream bis = new BufferedInputStream(new FileInputStream("f:\\"));
+                                            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("d:\\"));
+                                            int by = 0; 
+                                            while((by = bis.read())!=-1){bos.write(by);}
+                  4.高效缓冲字节流依次读写一个字节数组：BufferedInputStream bis = new BufferedInputStream(new FileInputStream("f:\\"));
+                                            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream("d:\\"));
+                                            byte[] bys = new byte[1024];(usually is n*1024)
+                                            int len = 0;
+                                            while((len = bis.read(bys))!=-1){bos.write(bys,0,len);}
 
 ·字符流的抽象基类：Reader/Writer 字节流不方便操作中文，字符流=字节流+编码表
+     -两个字节拼成一个汉字
+       byte[] bys = s.getBytes("GBK");按照GBK的方式编码
+       String SS = String(byte[] bytes, Charset charset)：构造一个新的String由指定用指定的字节的数组解码charset 。
    ·OutStreamWriter/InputStreamReader字符输出流/字符输入流
-   flush()的作用？和close()的区别
+       InputStreamReader isr = new InputStreamReader(FileInputStream("f:\\"));
+       1.一次读一个字符：int ch = 0; while((ch = isr.read())!=-1){System.out.print((char)ch);}
+       2.一次读取一个字符数组：char[] chs = new char[1024];int len = 0;while((len = isr.read(chs))!=-1){System.out.print(new String(chs,0,len));}
+       在关闭字符流之前需要先刷新
+       flush()的作用刷新流，流对象还能继续使用，和close()的区别，关闭流后流对象不能继续使用。
    ·FileWriter/FileReader转换流
+       FileReader fr = new FileReader("a.txt");
+       FileWriter fw = new FileWriter("b.txt");
+       复制方式一/方式二
    ·BufferedWriter/BufferedReader字符缓冲流
+       1.复制：BufferedReader br = new BufferedReader(new FileReader(("a.txt"));
+         BufferedWriter bw = new BufferedWriter(new FileWriter(("b.txt"));
+         char[] chs = new char[1024];
+         int len = 0;
+         while((len = br.read(chs))!=-1){bw.writer(chs,0,len);}
+         bw.close();br.close();/方式一省略
 由这四个类派生出来的自子类名称都是以父类名作为子类名的后缀，如FileInputStream
-
-//练习//复制文本文件、图片
 标准输入输出流：System.in/System.out
 随机访问RandomAccessFile类，融合了InputStream和OutputStream的功能，支持随机访问文件的读取和写入
 合并SequenceInputStream类，将多个输入流串联在一起合并为一个输入流
