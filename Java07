@@ -23,7 +23,7 @@ Q2:如果catch里面有return语句，请问finally的代码还会执行吗?如�
  *      b.方法体中的throw new Exception();自己抛出一个异常，自定义的异常需要明确的throw出来，因为满足这个条件往往是我们自己制定的规则不满足了。
 
 ··File类：文件和目录径名的抽象表达形式(仅仅是一个路径的表示，不代表具体的事物一定是存在的)
-File file = new File("f:\\aaa\\bbb\\b.txt");不加mkdir/mkdirs时没有具体的文件生成
+File file = new File("f:\\aaa\\bbb\\b.txt");不加.mkdir/.mkdirs时没有具体的文件生成
 FilenameFilter()文件过滤器接口 重写方法accept
 
 ！构造方法不能递归使用！
@@ -89,6 +89,7 @@ java对数据的操作都是通过流的方式，用于操作流的对象都在I
          while((len = br.read(chs))!=-1){bw.writer(chs,0,len);}
          bw.close();br.close();/方式一省略
 由这四个类派生出来的自子类名称都是以父类名作为子类名的后缀，如FileInputStream
+复制图片有四种方法，复制文本有九种包括字符流和字节流
 标准输入输出流：System.in/System.out
 随机访问RandomAccessFile类，融合了InputStream和OutputStream的功能，支持随机访问文件的读取和写入
 合并SequenceInputStream类，将多个输入流串联在一起合并为一个输入流
@@ -96,7 +97,9 @@ java对数据的操作都是通过流的方式，用于操作流的对象都在I
 无关的二进制流，可以将这种二进制流持久保存在磁盘上，也可以通过网络将这种二进制流传输到另一个网络结点。
 反序列化流 ObjectInputStream类，吧二进制流数据还原成对象
 
-
+//将ArrayList集合中的字符串数据分存储到文本文件中//
+把字符串转化成字符数组：char[] chs = line.toCharArray();
+把字符数组转换成字符串：String s = String.valueOf(chs);
 
 
 
