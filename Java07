@@ -71,7 +71,7 @@ java对数据的操作都是通过流的方式，用于操作流的对象都在I
      -两个字节拼成一个汉字
        byte[] bys = s.getBytes("GBK");按照GBK的方式编码
        String SS = String(byte[] bytes, Charset charset)：构造一个新的String由指定用指定的字节的数组解码charset 。
-   ·OutStreamWriter/InputStreamReader字符输出流/字符输入流
+   ·OutStreamWriter/InputStreamReader字符输出流/字符输入流 转换流：将字节流转换成字符流
        InputStreamReader isr = new InputStreamReader(FileInputStream("f:\\"));
        1.一次读一个字符：int ch = 0; while((ch = isr.read())!=-1){System.out.print((char)ch);}
        2.一次读取一个字符数组：char[] chs = new char[1024];int len = 0;while((len = isr.read(chs))!=-1){System.out.print(new String(chs,0,len));}
@@ -100,11 +100,21 @@ java对数据的操作都是通过流的方式，用于操作流的对象都在I
 //将ArrayList集合中的字符串数据分存储到文本文件中//
 把字符串转化成字符数组：char[] chs = line.toCharArray();
 把字符数组转换成字符串：String s = String.valueOf(chs);
+String.getBytes() 将字符串转换成字节数组byte[]类型
 
+PrintWriter/PrintStream 字符/字节流打印流 只能操作目的地，不能操作数据源
 
+Q： 哪些流可以直接操作文件：FileInputStream/FileOutStream/FileReader/FileWriter/PrintStream/PrintWriter
 
+System.out.println 不仅自动换行还自动刷新
+标准缓冲区输出：一次写一个字符串BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+标准缓冲区输入：一次读一个字符串BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+System.out.println(Object obj):打印一个对象，首先调用String.valueOf(obj)获取打印对象的字符串值，然后调用print
+（string）然后println().
 
-
-
-
+使用(反)序列化机制创建对象
+把对象转换为字节序列的过程称为对象的序列化。 只有实现了Serializable和Externalizable接口的类的对象才能被序列化。 
+把字节序列恢复为对象的过程称为对象的反序列化。
+字​面​意​思​就​是​序​列​化​的​版​本​号​，凡是实现Serializable接口的类都有一个表示序列化版本标识符的静态变量。
+实现Serializable接口的类如果没有添加serialVersionUID，就会出现警告提示。
