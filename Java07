@@ -118,3 +118,7 @@ System.out.println(Object obj):打印一个对象，首先调用String.valueOf(o
 把字节序列恢复为对象的过程称为对象的反序列化。
 字​面​意​思​就​是​序​列​化​的​版​本​号​，凡是实现Serializable接口的类都有一个表示序列化版本标识符的静态变量。
 实现Serializable接口的类如果没有添加serialVersionUID，就会出现警告提示。
+
+ Properties 类表示了一个持久的属性集。Properties 可保存在流中或从流中加载。属性列表中每个键及其对应值都是一个字符串。 
+ 可以作为map集合使用
+ Poperties.setProperty(key,value)=Poperties.set(key,value)
