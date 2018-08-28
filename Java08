@@ -6,8 +6,8 @@
   所以我们常见的操作系统都是多进程操作系统。比如：Windows，Mac和Linux等，能在同一个时间段内执
   行多个任务。
 ？对于单核计算机来讲，游戏进程和音乐进程是同时运行的吗?不是。
-	为CPU在某个时间点上只能做一事情，计算机是在游戏进程和音乐进程间做着频繁切换，且切换速度很快，
-  所以，我们感觉游戏和音乐在同时进行，其实并不是同时执行的。
+因为CPU在某个时间点上只能做一事情，计算机是在游戏进程和音乐进程间做着频繁切换，且切换速度很快，所
+以，我们感觉游戏和音乐在同时进行，其实并不是同时执行的。
 	
   多进程的作用不是提高执行速度，而是提高CPU的使用率。
 
@@ -18,3 +18,41 @@
 线程运行的随机性。
 多线程的作用不是提高执行速度，而是为了提高应用程序的使用率。
 jvm虚拟机的启动是单线程的还是多线程的？JVM启动至少启动了垃圾回收线程和主线程，所以是多线程的。
+
+多线程的实现方案：
+1.Thread类
+2.Runnable接口：适合多个相同程序代码处理同一个资源
+3.实现callable接口:相比于runnable，可以有返回值，并且可以抛出异常，执行 Callable 方式，需要 FutureTask 实现类的支持，用于接收运算结果。
+线程有两种调度模型：分时调度和抢占式调度。
+java使用抢占式调度，根据优先级高低获得cpu的使用权，public final int getPriotiry()/public final void setPriority(int newPriority)
+对线程的控制：休眠public static void sleep(long millis)/加入public final void join()/礼让public static void yield()
+             守护线程public final void setDaemon(boolean on)/中断线程public final void stop()、public void interrupt()
+·线程的生命周期：新建：创建线程对象>>start()>>就绪：有执行的资格没有执行权>>抢占到cpu执行权（根据优先级）>>运行：有执行资格及执行权>>sleep()、wait()>>
+阻塞：没有执行资格及执行权>>就绪..
+不要假定高优先级的线程一定先于低优先级的线程执行，不要有逻辑依赖于线程优先级，否则可能产生意外结果
+Java的setPriority()方法只应用于局部的优先级。Thread priority isn't very meaningful when all threads are competing for CPU
+
+·解决线程安全问题
+1.同步代码块：synchronized(对象){需要同步的代码；}，对象：因此通常推荐使用可能被并发访问的共享资源充当同步监视器。
+  前提：多个线程使用同一个锁对象。在线程较多时比较低效。
+2.同步方法：把同步关键字加到方法上，这个同步方法（非static方法）无须显示指定同步监视器，同步方法的同步监视器就是this，也就是调用该方法的对象。
+synchronized可以修饰方法，修饰代码块，但是不能修饰构造器、成员变量等
+3.Lock锁对象：Lock是控制多个线程对资源共享进行访问的工具，通常，锁提供了对共享资源的独占访问，每次只能有一个线程对Lock对象加锁，线程开始访问共享资源之前应
+ 该先获得Lock对象。详见：https://www.cnblogs.com/dolphin0520/p/3923167.html
+ ReentrantLock（可重入锁)
+ Lock lock = new ReentrantLock();
+        lock.lock();
+        try {
+            //更新对象状态
+            //如果有异常则捕获异常
+            //必要时恢复不变性条件
+            //如果由return语句必须放在这里
+        }finally {
+            lock.unlock();
+        }
+	
+·线程池
+当程序中要创建大量生存周期很短的线程时，考虑使用线程池，池中每个线程代码结束后并不会死亡，而再次回到池中成为空闲状态，等待下一个对象使用。
+Executors工厂类来产生线程池
+
+匿名内部类方法使用多线程：new Thread(){}.start()/new Thread(new Runnable){}.start()
