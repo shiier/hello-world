@@ -54,5 +54,10 @@ synchronized可以修饰方法，修饰代码块，但是不能修饰构造器�
 ·线程池
 当程序中要创建大量生存周期很短的线程时，考虑使用线程池，池中每个线程代码结束后并不会死亡，而再次回到池中成为空闲状态，等待下一个对象使用。
 Executors工厂类来产生线程池
-
+ *		A:定义类MyRunnable实现Runnable接口
+ * 		B:创建MyRunnable对象		
+ * 		C:创建线程池对象public static ExecutorService newFixedThreadPool(int nThreads)
+ * 		D:提交Future<?> submit(Runnable task)
+ * 		E:释放ExecutorService.shutdown();
 匿名内部类方法使用多线程：new Thread(){}.start()/new Thread(new Runnable){}.start()
+日期格式不同步。 建议为每个线程创建单独的格式实例。 如果多个线程同时访问格式，则必须在外部进行同步。 Simpledateformat
