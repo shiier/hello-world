@@ -1,4 +1,3 @@
-·GUI
 java为gui提供的对象都讯在java.Awt和javax.Swing两个包中
 Container常用子类：Window/Panel（面板，不能单独存在。）
 Window常用子类：Frame/Dialog
@@ -19,3 +18,4 @@ MenuBar,Menu,MenuItem
 也可以菜单添加到菜单中，作为子菜单。
 通过setMenuBar()方法，将菜单添加到Frame中。
 netbeans工具
+JFrame 有一个 Content Pane，窗口能所有组件都是添加在这个 Content Pane 中。JFrame 提供了两个方法：getContentPane 和 setContentPane 就是用于获取和设置其 Content Pane 的。显示的
